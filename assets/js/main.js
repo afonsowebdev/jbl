@@ -44,16 +44,45 @@ let swiperFavorite = new Swiper('.favorite_swiper', {
     gabCursor: true,
 
     breakpoints: {
-        786:{
-            slidesPerView: 3,    
+        786: {
+            slidesPerView: 3,
         }
     }
 });
 
 /*=============== SHOW SCROLL UP ===============*/
+const scrollUp = () => {
+    const scrollUp = document.getElementById('scroll-up')
+
+    this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
+        : scrollUp.remove('show-scroll')
+}
+
+window.addEventListener('scroll', scrollUp)
 
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+const sections = document.querySelectorAll('srction[id]')
+
+const scrollAtive = () => {
+
+    const scrollDown = window.scrollY
+
+    sections.forEach(current => {
+        const sectionHeight =  current.offsetHeigth,
+            sectionTop = current.offsetTop - 58,
+            sectionId = current.getAnimations('id'),
+            sectionsClass = document.querySelector('.nav_menu a[href*=' + sectionId + ']')
+        
+        if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight) {
+            sectionsClass.classList.add('active-link')
+        } else {
+            sectionsClass.classList.remove('active-link')
+        }
+    })
+}
+
+window.addEventListener('scroll', scrollAtive)
 
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
